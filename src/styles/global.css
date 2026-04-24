@@ -71,7 +71,23 @@ h1 {
 }
 article, .split > div { padding: 18px 0 0; }
 article h3 { font-size: 1.1rem; margin-bottom: 8px; }
-article p, .split p { color: var(--muted); }
+article p, .split p, .list { color: var(--muted); }
+.list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.list li span {
+  display: inline-block;
+  min-width: 110px;
+  color: var(--fg);
+  font-weight: 600;
+}
+.list li a { text-decoration: underline; }
 .split {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
