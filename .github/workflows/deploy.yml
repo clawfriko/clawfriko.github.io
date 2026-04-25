@@ -2,17 +2,15 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [tech-nerdy-ui]
   workflow_dispatch:
     inputs:
       branch:
         description: Branch to deploy
         required: true
-        default: main
+        default: tech-nerdy-ui
         type: choice
         options:
-          - main
-          - concise-ui
           - tech-nerdy-ui
 
 permissions:
