@@ -3,18 +3,20 @@ import '../styles/global.css';
 
 const projects = [
   {
-    title: 'Project One',
-    description: 'A short description of what it does and why it matters.',
+    title: 'Signal Router',
+    description: 'A fast path for turning noisy inputs into clean, actionable outputs.',
   },
   {
-    title: 'Project Two',
-    description: 'A short description focused on the outcome, not the hype.',
+    title: 'Terminal UI Kit',
+    description: 'A component set with sharp spacing, status chips, and glowing accents.',
   },
   {
-    title: 'Project Three',
-    description: 'A short description that stays concrete and specific.',
+    title: 'Build Inspector',
+    description: 'A tiny dashboard for checking health, latency, and release signals.',
   },
 ];
+
+const stack = ['TypeScript', 'Astro', 'Node', 'CSS Grid', 'APIs'];
 ---
 
 <!doctype html>
@@ -31,10 +33,15 @@ const projects = [
   <body>
     <main class="page">
       <section class="hero">
-        <p class="eyebrow">Developer portfolio</p>
+        <p class="eyebrow">Developer portfolio // active build</p>
         <h1>Clawfriko</h1>
-        <p class="lede">I build simple software with clear interfaces and careful execution.</p>
-        <p class="subtle">Minimal, practical, and easy to understand.</p>
+        <p class="lede">I build crisp interfaces, tidy systems, and tools that feel fast the second they load.</p>
+        <p class="subtle">Minimal, but with LEDs on.</p>
+        <div class="status-row" aria-label="Technical highlights">
+          <span class="chip">low-latency UI</span>
+          <span class="chip">clean architecture</span>
+          <span class="chip">shipping mode</span>
+        </div>
         <nav class="links" aria-label="Social links">
           <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -45,8 +52,9 @@ const projects = [
       <section class="section">
         <h2>Selected work</h2>
         <div class="projects">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <article>
+              <p class="project-index">0{index + 1}</p>
               <h3>{project.title}</h3>
               <p>{project.description}</p>
             </article>
@@ -56,12 +64,10 @@ const projects = [
 
       <section class="section split">
         <div>
-          <h2>CV — Experience</h2>
-          <ul class="list">
-            <li><span>2024–Now</span> Developer, building practical software</li>
-            <li><span>2022–2024</span> Focused on systems, UI, and product work</li>
-            <li><span>Education</span> Add your degree or training here</li>
-          </ul>
+          <h2>Stack</h2>
+          <div class="stack">
+            {stack.map((item) => <span class="chip chip-dark">{item}</span>)}
+          </div>
         </div>
         <div>
           <h2>Write-ups — Notes & essays</h2>
