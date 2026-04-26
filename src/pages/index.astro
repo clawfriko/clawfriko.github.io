@@ -45,10 +45,20 @@ const stack = ['TypeScript', 'Astro', 'Node', 'CSS Grid', 'APIs'];
       </header>
 
       <section class="hero panel">
+        <div class="editor-tabs" aria-label="Open files">
+          <span class="tab active">portfolio.astro</span>
+          <span class="tab">stack.ts</span>
+          <span class="tab">notes.md</span>
+        </div>
         <p class="eyebrow">dev@clawfriko:~</p>
         <h1>Clawfriko</h1>
-        <p class="lede">I build crisp interfaces, tidy systems, and tools that feel fast the second they load.</p>
+        <p class="lede">I build crisp interfaces, tidy systems, and tools that feel fast the second they load.<span class="cursor" aria-hidden="true">▍</span></p>
         <p class="subtle">Minimal, but with LEDs on.</p>
+        <div class="terminal-lines" aria-label="Terminal log">
+          <p><span class="prompt">➜</span> bun run build</p>
+          <p><span class="prompt success">✔</span> static routes compiled</p>
+          <p><span class="prompt">➜</span> git push origin main</p>
+        </div>
         <div class="status-row" aria-label="Technical highlights">
           <span class="chip">low-latency UI</span>
           <span class="chip">clean architecture</span>

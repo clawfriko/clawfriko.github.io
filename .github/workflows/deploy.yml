@@ -12,9 +12,6 @@ on:
         type: choice
         options:
           - main
-          - concise-ui
-          - tech-nerdy-ui
-          - neovim-gruvbox
 
 permissions:
   contents: read
