@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+import '../../styles/global.css';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects
+    .filter((entry) => !entry.data.draft)
+    .map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const formattedDate = entry.data.date.toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={entry.data.description} />
+    <title>{entry.data.title} — Clawfriko</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="shell detail-shell">
+      <p class="breadcrumb"><a href="/">← back</a></p>
+      <article class="panel detail-card">
+        <p class="eyebrow">project</p>
+        <h1>{entry.data.title}</h1>
+        <p class="lede">{entry.data.description}</p>
+        <div class="meta-row detail-meta">
+          <time datetime={entry.data.date.toISOString()}>{formattedDate}</time>
+          <span>{entry.data.tags.join(' · ')}</span>
+        </div>
+        <div class="stack">
+          {entry.data.tags.map((tag) => <span class="chip chip-dark">{tag}</span>)}
+        </div>
+        <div class="prose">
+          <Content />
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

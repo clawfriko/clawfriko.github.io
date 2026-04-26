@@ -231,6 +231,16 @@ article p, .split p, .list { color: var(--muted); }
   font-weight: 600;
 }
 .list li a { text-decoration: underline; }
+.project-card { display: block; }
+.meta-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.meta-row span { color: var(--accent3); }
 .split {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -246,6 +256,12 @@ article p, .split p, .list { color: var(--muted); }
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.detail-shell { max-width: 900px; }
+.breadcrumb { margin: 0 0 14px; color: var(--muted); }
+.detail-card { padding: 28px; }
+.detail-meta { margin-top: 16px; }
+.prose { margin-top: 24px; color: var(--muted); }
+.prose p + p { margin-top: 14px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

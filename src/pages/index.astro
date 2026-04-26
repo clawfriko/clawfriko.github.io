@@ -1,21 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
 import '../styles/global.css';
 
-const projects = [
-  {
-    title: 'Signal Router',
-    description: 'A fast path for turning noisy inputs into clean, actionable outputs.',
-  },
-  {
-    title: 'Terminal UI Kit',
-    description: 'A component set with sharp spacing, status chips, and glowing accents.',
-  },
-  {
-    title: 'Build Inspector',
-    description: 'A tiny dashboard for checking health, latency, and release signals.',
-  },
-];
-
+const projects = (await getCollection('projects'))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => a.data.index - b.data.index);
+const notes = (await getCollection('notes'))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const stack = ['TypeScript', 'Astro', 'Node', 'CSS Grid', 'APIs'];
 ---
 
@@ -74,12 +66,18 @@ const stack = ['TypeScript', 'Astro', 'Node', 'CSS Grid', 'APIs'];
       <section class="section panel">
         <h2>selected work</h2>
         <div class="projects">
-          {projects.map((project, index) => (
-            <article>
-              <p class="project-index">0{index + 1}</p>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-            </article>
+          {projects.map((project) => (
+            <a class="project-card" href={`/projects/${project.slug}/`}>
+              <article>
+                <p class="project-index">0{project.data.index}</p>
+                <h3>{project.data.title}</h3>
+                <p>{project.data.description}</p>
+                <div class="meta-row">
+                  <time datetime={project.data.date.toISOString()}>{project.data.date.toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+                  <span>{project.data.tags.join(' · ')}</span>
+                </div>
+              </article>
+            </a>
           ))}
         </div>
       </section>
@@ -94,9 +92,16 @@ const stack = ['TypeScript', 'Astro', 'Node', 'CSS Grid', 'APIs'];
         <div class="panel">
           <h2>notes / write-ups</h2>
           <ul class="list">
-            <li><a href="#">How I built X</a></li>
-            <li><a href="#">Notes on a project</a></li>
-            <li><a href="#">What I learned from Y</a></li>
+            {notes.map((note) => (
+              <li>
+                <strong>{note.data.title}</strong>
+                <div class="meta-row">
+                  <time datetime={note.data.date.toISOString()}>{note.data.date.toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+                  <span>{note.data.tags.join(' · ')}</span>
+                </div>
+                <div>{note.data.excerpt}</div>
+              </li>
+            ))}
           </ul>
         </div>
       </section>
